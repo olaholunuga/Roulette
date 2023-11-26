@@ -9,7 +9,7 @@ class TestBinBuider():
     Args:
         TestCase (_type_):
     """
-    def __init__(self) -> None:
+    def setup_method(self):
         self.wheel = Wheel(1)
         self.bin_builder = BinBuilder()
         self.bin_builder.buildBins(self.wheel)

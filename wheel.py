@@ -6,12 +6,6 @@ from typing import Tuple
 from random import Random
 
 class Wheel:
-    """
-    
-    """
-    bins: tuple[Bin[Outcome]]
-    rng: int
-    all_outcomes: dict[Outcome]
     
     def __init__(self, seed=None) -> None:
         self.bins = tuple(Bin([]) for i in range(38))

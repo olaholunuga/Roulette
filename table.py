@@ -20,7 +20,7 @@ class Table:
         self.wheel: Wheel = wheel
         self.limit: int = limit
         self.minimum: int = minimum
-        self.bets: list[Bet] = None
+        self.bets: list[Bet] = []
         
     def placeBet(self, bet: Bet) -> None:
         """
@@ -56,7 +56,7 @@ class Table:
         Returns:
             str:
         """
-        return "Table({})".format("".join((x.join for x in self.bets)))
+        return "Table({})".format("".join((str(x) for x in self.bets)))
     
     def isValid(self) -> bool:
         """
