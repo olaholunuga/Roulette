@@ -4,10 +4,11 @@ from pytest import raises
 from outcome import Outcome
 from bet import Bet
 from wheel import Wheel
+from unittest import TestCase
 
-class TestTable:
+class TestTable(TestCase):
     
-    def setup_method(self, method):
+    def setUp(self):
         wheel = Wheel()
         self.table = Table(wheel, 100, 10)
         
@@ -30,3 +31,8 @@ class TestTable:
         self.table.placeBet(Bet(60, Outcome("7", 35)))
         strr = self.table.__str__()
         assert isinstance(strr, str)
+        
+    def test_table(self):
+        bet = Bet(11, Outcome("1", 35))
+        self.table.placeBet(bet)
+        self.assertIn(bet, self.table.bets)
