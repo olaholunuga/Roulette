@@ -10,7 +10,7 @@ class Wheel:
     def __init__(self, seed=None) -> None:
         self.bins = tuple(Bin([]) for i in range(38))
         self.rng = Random()
-        self.all_outcomes = None
+        self.all_outcomes = dict()
         if seed:
             self.rng.seed(seed)
         
