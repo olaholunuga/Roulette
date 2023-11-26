@@ -2,6 +2,7 @@
 from typing import Iterator
 from bet import Bet
 from wheel import Wheel
+from pprint import saferepr
 
 class InvalidBet(Exception):
     
@@ -10,15 +11,16 @@ class InvalidBet(Exception):
 
 class Table:
     
-    def __init__(self, *bets: list[Bet]) -> None:
+    def __init__(self, wheel, limit, minimum) -> None:
         """
 
         Args:
             bets (Bet): _description_
         """
-        self.limit: int = None
-        self.minimum: int = None
-        self.bets: list[Bet] = bets
+        self.wheel: Wheel = wheel
+        self.limit: int = limit
+        self.minimum: int = minimum
+        self.bets: list[Bet] = None
         
     def placeBet(self, bet: Bet) -> None:
         """
@@ -26,14 +28,10 @@ class Table:
         Args:
             bet (Bet): _description_
         """
-        try:
-            if self.limit and bet > self.limit:
-                raise InvalidBet
-            if self.minimum and bet < self.minimum:
-                raise InvalidBet
-        except InvalidBet as err:
-            pass
         self.bets.append(bet)
+        if not self.isValid():
+            raise InvalidBet
+        
     
     def __iter__(self) -> Iterator[Bet]:
         """
@@ -50,9 +48,23 @@ class Table:
         Returns:
             str: _description_
         """
-        return f"Table {self.bets}"
+        return saferepr(self.bets)
     
-    def isValid(self):
-        for b in self.bets:
-            if b.amountBet > self.limit or b.amountBet < self.minimum:
-                raise InvalidBet
+    def __repr__(self) -> str:
+        """
+
+        Returns:
+            str:
+        """
+        return "Table({})".format("".join((x.join for x in self.bets)))
+    
+    def isValid(self) -> bool:
+        """
+
+        Returns:
+            bool:
+        """
+        bet_sum = sum(x.amountBet for x in self.bets)
+        if bet_sum > self.limit or bet_sum < self.minimum:
+            return False
+        return True
