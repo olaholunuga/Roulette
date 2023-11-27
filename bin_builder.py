@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 from wheel import Wheel
-from outcome import Outcome
+from outcome import Outcome, PrisonOutcome
 
 class BinBuilder:
     """
     """
-    def __init__(self) -> None:
-        pass
     
     def buildBins(self, wheel: Wheel) -> None:
         """
@@ -150,4 +148,48 @@ class BinBuilder:
         """
         oc = Outcome("FIVE BET", 6)
         for i in [0, 37, 1, 2, 3]:
+            wheel.addOutcome(i, oc)
+
+class EuroBinBuilder(BinBuilder):
+    """A SubClass of the BinBuilder Class
+
+    Args:
+        BinBuilder (_type_):
+    """
+    
+    def buildBins(self, wheel: Wheel) -> None:
+        self.fourBetGen(wheel)
+        return super().buildBins(wheel)
+    
+    def straightBetGen(self, wheel: Wheel) -> None:
+        """
+
+        Args:
+            wheel (Wheel):
+        """
+        for i in range(1, 37):
+            oc = Outcome(f"Straight {i}", 35)
+            wheel.addOutcome(i, oc)
+            
+        oc1 = PrisonOutcome("Zero", 35)
+        oc2 = Outcome("Double zero", 35)
+        
+        wheel.addOutcome(0, oc1)
+        wheel.addOutcome(37, oc2)
+    def fiveBetGen(self, wheel: Wheel) -> None:
+        """UnImplimented
+
+        Args:
+            wheel (Wheel): _description_
+        """
+        pass
+    
+    def fourBetGen(self, wheel: Wheel) -> None:
+        """
+
+        Args:
+            wheel (Wheel):
+        """
+        oc = Outcome("0-1-2-3", 6)
+        for i in [0, 1, 2, 3]:
             wheel.addOutcome(i, oc)
