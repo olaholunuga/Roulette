@@ -24,8 +24,8 @@ class Passenger57:
         Args:
             bet (Bet):
         """
-        won = self.table.bets
-        print("Won")
+        
+        print(f"Won {bet}")
     
     def lose(self, bet: Bet) -> None:
         """
@@ -33,4 +33,4 @@ class Passenger57:
         Args:
             bet (Bet): _description_
         """
-        print("lost")
+        print(f"lost {bet}")

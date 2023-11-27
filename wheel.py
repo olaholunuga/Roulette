@@ -3,7 +3,7 @@ from os import urandom
 from outcome import Outcome
 from bin import Bin
 from typing import Tuple
-from random import Random
+from random import Random, randint
 
 class Wheel:
     
@@ -51,6 +51,8 @@ class Wheel:
             Bin: _description_
         """
         rng = self.rng.randint(0, 37)
+        print(rng)
+        rang = randint(0, 37)
         return self.bins[rng]
     
     def get(self, bin: int) -> Bin:

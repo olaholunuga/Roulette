@@ -10,16 +10,6 @@ class Bet:
     amountBet: int
     outcome: Outcome
     
-    def __init__(self, amount: int, outcome: Outcome) -> None:
-        """_summary_
-
-        Args:
-            amount (int):
-            outcome (Outcome):
-        """
-        self.amountBet = amount
-        self.outcome = outcome
-    
     def winAmount(self) -> int:
         return self.amountBet * (self.outcome.odds + 1)
     
