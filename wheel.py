@@ -11,8 +11,9 @@ class Wheel:
         self.bins = tuple(Bin([]) for i in range(38))
         self.rng = Random()
         self.all_outcomes = dict()
-        if seed:
-            self.rng.seed(seed)
+        # if seed:
+        self.rng.seed()
+        self.choice = None
         
     def addOutcome(self, number: int, outcome: Outcome) -> None:
         """_summary_
@@ -51,9 +52,8 @@ class Wheel:
             Bin: _description_
         """
         rng = self.rng.randint(0, 37)
-        print(rng)
-        rang = randint(0, 37)
-        return self.bins[rng]
+        self.choice = self.bins[rng]
+        return self.choice
     
     def get(self, bin: int) -> Bin:
         """_summary_

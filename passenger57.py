@@ -10,6 +10,7 @@ class Passenger57:
         self.wheel = wheel
         self.table = table
         self.black = Outcome("BLACK", 1)
+        self.won = None
         
     def placeBet(self) -> None:
         """
@@ -24,7 +25,7 @@ class Passenger57:
         Args:
             bet (Bet):
         """
-        
+        self.won = True
         print(f"Won {bet}")
     
     def lose(self, bet: Bet) -> None:
@@ -33,4 +34,5 @@ class Passenger57:
         Args:
             bet (Bet): _description_
         """
+        self.won = False
         print(f"lost {bet}")

@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from passenger57 import Passenger57
 from bin_builder import BinBuilder
 
+
 @dataclass
 class Game:
     """
@@ -37,4 +38,6 @@ if __name__ == "__main__":
     bb.buildBins(wheel)
     player = Passenger57(wheel, table)
     game_start = Game(wheel, table)
+    game_start.cycle(player)
+    game_start.cycle(player)
     game_start.cycle(player)
