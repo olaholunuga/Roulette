@@ -26,3 +26,10 @@ class Outcome:
             str: _description_
         """
         return f"{self.name:s} {self.odds}:1"
+
+class PrisonOutcome(Outcome):
+    """A Subclass of the outcome class
+
+    Args:
+        Outcome (_type_): _description_
+    """
