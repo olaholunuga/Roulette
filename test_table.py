@@ -36,3 +36,14 @@ class TestTable(TestCase):
         bet = Bet(11, Outcome("1", 35))
         self.table.placeBet(bet)
         self.assertIn(bet, self.table.bets)
+        
+    def test_iter(self):
+        bet = Bet(11, Outcome("1", 35))
+        bet2 = Bet(12, Outcome("2", 35))
+        self.table.placeBet(bet)
+        self.table.placeBet(bet2)
+        bet_iter = iter(self.table)
+        beti1 = next(bet_iter)
+        beti2 = next(bet_iter)
+        assert bet == beti1
+        assert bet2 == beti2
