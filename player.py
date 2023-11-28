@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from table import Table
 from bet import Bet
+from outcome import PrisonOutcome
 
 class Player:
     
@@ -8,7 +9,7 @@ class Player:
         self.table = table
         self.stake: int = 0
         self.wheel = self.table.wheel
-        self.roundsToGo: int = 0
+        self.roundsToGo: int = 5
     
     def playing(self):
         if self.roundsToGo <= 0 or self.stake <= 0:
@@ -22,7 +23,10 @@ class Player:
         pass
     
     def win(self, bet: Bet):
-        return bet.winAmount
+        self.stake += bet.winAmount()
+        return
     
     def lose(self, bet: Bet):
-        pass
+        if isinstance(bet, PrisonOutcome):
+            self.stake += bet.amountBet * 0.5
+        return

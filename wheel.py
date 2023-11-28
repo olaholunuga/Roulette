@@ -11,8 +11,10 @@ class Wheel:
         self.bins = tuple(Bin([]) for i in range(38))
         self.rng = Random()
         self.all_outcomes = dict()
-        # if seed:
-        self.rng.seed()
+        if seed:
+            self.rng.seed(seed)
+        else:
+            self.rng.seed(urandom(8))
         self.choice = None
         
     def addOutcome(self, number: int, outcome: Outcome) -> None:
@@ -25,8 +27,6 @@ class Wheel:
         if outcome not in self.all_outcomes:
             self.all_outcomes[outcome.name] = outcome
         bin_list = list(self.bins)
-        # bin_list[number] = Bin([outcome])
-        # bin_list[number] = set(bin_list[number])
         oc_bin = set(bin_list[number].copy())
         if outcome not in oc_bin:
             oc_bin.add(outcome)

@@ -65,6 +65,7 @@ class Table:
             bool:
         """
         bet_sum = sum(x.amountBet for x in self.bets)
+        print(bet_sum)
         if bet_sum > self.limit or bet_sum < self.minimum:
             return False
         return True
