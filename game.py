@@ -21,6 +21,7 @@ class Game:
         Args:
             player (Passenger57):
         """
+        self.table.bets_clear()
         if player.playing():
             player.placeBet()
         win_bin = self.table.wheel.choose()
@@ -30,18 +31,19 @@ class Game:
                 player.win(bet)
             else:
                 player.lose(bet)
-        return win_bin
 
 
 if __name__ == "__main__":
-    wheel = Wheel(10)
+    wheel = Wheel()
     table = Table(wheel, 100, 1)
     bb = BinBuilder()
     bb.buildBins(wheel)
     player = Passenger57(table)
     player2 = Martingale(table)
-    player2.stake = 200
+    player2.stake = 100
     game_start = Game(wheel, table)
-    for i in range(4):
-        print(game_start.cycle(player2))
-        print(player2.stake)
+    print(f"Stake before games: {player2.stake}")
+    while player2.playing():
+        game_start.cycle(player2)
+    print(f"WINS - {player2.stat[0]}\nLOSE - {player2.stat[1]}")
+    print(f"Stake After games: {player2.stake}")

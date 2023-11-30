@@ -17,7 +17,7 @@ class Outcome:
         Returns:
             float: _description_
         """
-        return self.odd * amount
+        return (self.odds * amount) + amount
     
     def __str__(self) -> str:
         """_summary_

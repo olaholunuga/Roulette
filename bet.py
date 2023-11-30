@@ -11,7 +11,7 @@ class Bet:
     outcome: Outcome
     
     def winAmount(self) -> int:
-        return self.amountBet * self.outcome.odds
+        return self.outcome.winAmount(self.amountBet) # self.amountBet * self.outcome.odds
     
     def loseAmount(self) -> int:
         return self.amountBet

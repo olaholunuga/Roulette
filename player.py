@@ -9,13 +9,16 @@ class Player:
         self.table = table
         self.stake: int = 0
         self.wheel = self.table.wheel
-        self.roundsToGo: int = 5
+        self.roundsToGo: int = 20
+        self.stat = [0, 0]
     
     def playing(self):
         if self.roundsToGo <= 0 or self.stake <= 0:
             return False
         if self.roundsToGo > 0 or self.stake > 0:
             return True
+        # if self.stake > 0:
+        #     return True
         False
         
     
@@ -24,9 +27,11 @@ class Player:
     
     def win(self, bet: Bet):
         self.stake += bet.winAmount()
+        self.stat[0] += 1
         return
     
     def lose(self, bet: Bet):
         if isinstance(bet, PrisonOutcome):
             self.stake += bet.amountBet * 0.5
+        self.stat[1] += 1
         return

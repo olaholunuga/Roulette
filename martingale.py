@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from table import Table
+from table import Table, InvalidBet
 from player import Player
 from bet import Bet
 
@@ -18,9 +18,12 @@ class Martingale(Player):
             amount = self.stake
         if amount > self.table.limit:
             amount = self.table.limit
-        
         self.stake -= amount
-        self.table.placeBet(Bet(amount, self.black))
+        bet = Bet(amount, self.black)
+        try:
+            self.table.placeBet(bet)
+        except InvalidBet:
+            pass
     
     def win(self, bet):
         """
@@ -29,6 +32,7 @@ class Martingale(Player):
             bet (_type_): _description_
         """
         self.lossCount = 0
+        self.betMultiple = 2 ** self.lossCount
         return super().win(bet)
     
     def lose(self, bet):
@@ -38,4 +42,5 @@ class Martingale(Player):
             bet (_type_): _description_
         """
         self.lossCount += 1
+        self.betMultiple = 2 ** self.lossCount
         return super().lose(bet)
