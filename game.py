@@ -15,7 +15,7 @@ class Game:
     wheel: Wheel
     table: Table
         
-    def cycle(self, player: Passenger57):
+    def cycle(self, player: Martingale):
         """
 
         Args:
@@ -25,12 +25,13 @@ class Game:
         if player.playing():
             player.placeBet()
         win_bin = self.table.wheel.choose()
-        player.roundsToGo -= 1
+        player.rounds -= 1
         for bet in iter(self.table):
             if bet.outcome in win_bin:
                 player.win(bet)
             else:
                 player.lose(bet)
+        return player.bet
 
 
 if __name__ == "__main__":

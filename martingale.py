@@ -11,6 +11,7 @@ class Martingale(Player):
         self.lossCount: int = 0
         self.betMultiple: int = 2 ** self.lossCount
         self.black = self.table.wheel.getOutcome("BLACK")
+        self.bet = None
     
     def placeBet(self):
         amount = self.betMultiple
@@ -19,9 +20,9 @@ class Martingale(Player):
         if amount > self.table.limit:
             amount = self.table.limit
         self.stake -= amount
-        bet = Bet(amount, self.black)
+        self.bet = Bet(amount, self.black)
         try:
-            self.table.placeBet(bet)
+            self.table.placeBet(self.bet)
         except InvalidBet:
             pass
     
