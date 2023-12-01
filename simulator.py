@@ -40,15 +40,16 @@ class Simulator:
             duration += 1
         self.durations.append(duration)
         self.maxima.append(max(stakes))
-        return stakes, player.stake, bet
+        return stakes, self.player.stake, bet
     
     def gather(self) -> None:
         roll = 0
-        print("maxima    duration    player_end_stake    bet")
+        print("  maxima  duration  player_end_stake      bet")
         for _ in range(self.samples):
             sess = self.session()
-            print("{}   {}    {}    {}".format(self.maxima[roll], self.durations[roll], sess[1], sess[2]))
+            print("{:>7}{:>9}{:>17}{:>20}".format(self.maxima[roll], self.durations[roll], sess[1], str(sess[2])))
             roll += 1
+            self.player = Martingale(self.game.table)
             
         
         # print(self.durations, len(self.durations))
