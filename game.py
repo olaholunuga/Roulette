@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from passenger57 import Passenger57
 from bin_builder import BinBuilder
 from martingale import Martingale
-
+from sevenreds import SevenReds
 
 @dataclass
 class Game:
@@ -15,7 +15,7 @@ class Game:
     wheel: Wheel
     table: Table
         
-    def cycle(self, player: Martingale):
+    def cycle(self, player: SevenReds):
         """
 
         Args:
@@ -31,20 +31,21 @@ class Game:
                 player.win(bet)
             else:
                 player.lose(bet)
+        player.winners(set(win_bin))
         return player.bet
 
 
-if __name__ == "__main__":
-    wheel = Wheel()
-    table = Table(wheel, 100, 1)
-    bb = BinBuilder()
-    bb.buildBins(wheel)
-    player = Passenger57(table)
-    player2 = Martingale(table)
-    player2.stake = 100
-    game_start = Game(wheel, table)
-    print(f"Stake before games: {player2.stake}")
-    while player2.playing():
-        game_start.cycle(player2)
-    print(f"WINS - {player2.stat[0]}\nLOSE - {player2.stat[1]}")
-    print(f"Stake After games: {player2.stake}")
+# if __name__ == "__main__":
+#     wheel = Wheel()
+#     table = Table(wheel, 100, 1)
+#     bb = BinBuilder()
+#     bb.buildBins(wheel)
+#     player = Passenger57(table)
+#     player2 = Martingale(table)
+#     player2.stake = 100
+#     game_start = Game(wheel, table)
+#     print(f"Stake before games: {player2.stake}")
+#     while player2.playing():
+#         game_start.cycle(player2)
+#     print(f"WINS - {player2.stat[0]}\nLOSE - {player2.stat[1]}")
+#     print(f"Stake After games: {player2.stake}")

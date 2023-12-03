@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from table import Table
 from bet import Bet
-from outcome import PrisonOutcome
+from outcome import PrisonOutcome, Outcome
 
 class Player:
     
@@ -50,4 +50,12 @@ class Player:
     def rounds(self, num: int) -> None:
         self.__roundsToGo = num
     
-    
+    # def winners(self, outcomes: set[Outcome]) -> None:
+    #     """_summary_
+
+    #     Args:
+    #         set (Outcome)): _description_
+    #     """
+    #     if Outcome("RED", 1) in outcomes:
+    #         self.redCounts -= 1
+    #         print(self.redCounts)
