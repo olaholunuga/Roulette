@@ -45,3 +45,16 @@ class Martingale(Player):
         self.lossCount += 1
         self.betMultiple = 2 ** self.lossCount
         return super().lose(bet)
+    
+    def winners(self, outcomes) -> None:
+        """_summary_
+
+        Args:
+            set (Outcome)): _description_
+        # """
+        pass
+        # if Outcome("RED", 1) in outcomes:
+        #     self.redCounts -= 1
+        #     #print(self.redCounts)
+        # else:
+        #     self.redCounts = 7

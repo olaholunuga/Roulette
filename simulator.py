@@ -34,13 +34,13 @@ class Simulator:
             List[int]:
         """
         player = self.player.player()
-        self.player.rounds = self.initDurations
-        self.player.stake = self.initStake
+        player.rounds = self.initDurations
+        player.stake = self.initStake
         
         duration = 0
         stakes = [player.stake]
         while player.playing():
-            bet = self.game.cycle(self.player)
+            bet = self.game.cycle(player)
             if not bet:
                 self.bet_num += 1
             stakes.append(player.stake)
