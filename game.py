@@ -15,7 +15,7 @@ class Game:
     wheel: Wheel
     table: Table
         
-    def cycle(self, player: SevenReds):
+    def cycle(self, player: ( SevenReds| Martingale | Passenger57 )):
         """
 
         Args:
