@@ -2,7 +2,7 @@
 from os import urandom
 from outcome import Outcome
 from bin import Bin
-from typing import Tuple
+from typing import Iterator
 from random import Random, randint
 
 class Wheel:
@@ -65,3 +65,14 @@ class Wheel:
             Bin: _description_
         """
         return self.bins[bin]
+    
+    def binIterator(self) -> list[Outcome]:
+        """_summary_
+
+        Returns:
+            lis[Outcome]: list of outcomes
+        """
+        all_oc = []
+        for v in self.all_outcomes.values():
+            all_oc.append(v)
+        return all_oc

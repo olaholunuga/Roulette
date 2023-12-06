@@ -19,13 +19,12 @@ class Simulator:
             game (Game): _description_
         """
         self.initDurations = 250
-        self.initStake = 100
+        self.initStake = 10
         self.samples = 50
         self.durations = []
         self.maxima = []
         self.player = player
         self.game = game
-        self.bet_num = 0
     
     def session(self) -> List[int]:
         """
@@ -41,23 +40,17 @@ class Simulator:
         stakes = [player.stake]
         while player.playing():
             bet = self.game.cycle(player)
-            if not bet:
-                self.bet_num += 1
             stakes.append(player.stake)
             duration += 1
         self.durations.append(duration)
         self.maxima.append(max(stakes))
-        return stakes, player.stake, self.bet_num
+        return stakes, player.stake
     
     def gather(self) -> None:
         roll = 0
-        print("  maxima  duration  player_end_stake      bet")
+        print("  maxima  duration  player_end_stake")
         for _ in range(self.samples):
             sess = self.session()
-            print("{:>7}{:>9}{:>17}{:>20}".format(self.maxima[roll], self.durations[roll], sess[1], str(sess[2])))
+            print("{:>7}{:>9}{:>17}".format(self.maxima[roll], self.durations[roll], sess[1]))
             self.bet_num = 0
             roll += 1
-            
-        
-        # print(self.durations, len(self.durations))
-        # print(self.maxima, len(self.maxima))

@@ -4,6 +4,7 @@ from passenger57 import Passenger57
 from martingale import Martingale
 from sevenreds import SevenReds
 from table import Table
+from playerrandom import PlayerRandom
 
 class PlayerFactory:
     """A Player initializer for the User of the Subclasses of Player to choose any player of their choice
@@ -21,5 +22,7 @@ class PlayerFactory:
             return Martingale(self.table)
         elif self.name.lower() == "sevenreds":
             return SevenReds(self.table)
+        elif self.name.lower() == "playerrandom":
+            return PlayerRandom(self.table)
         else:
             raise ValueError

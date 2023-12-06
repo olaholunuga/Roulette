@@ -15,7 +15,7 @@ class Game:
     wheel: Wheel
     table: Table
         
-    def cycle(self, player: ( SevenReds| Martingale | Passenger57 )):
+    def cycle(self, player: ( SevenReds | Martingale | Passenger57 )):
         """
 
         Args:
@@ -31,7 +31,8 @@ class Game:
                 player.win(bet)
             else:
                 player.lose(bet)
-        player.winners(set(win_bin))
+        if player.__class__ == (SevenReds | Martingale):
+            player.winners(set(win_bin))
         return player.bet
 
 
