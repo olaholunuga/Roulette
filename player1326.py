@@ -47,7 +47,8 @@ class Player1326NoWins(Player1326State):
         super().__init__(player)
     
     def currenBet(self, amount: int, oc: Outcome) -> Bet:
-        return Bet(amount, oc)
+        self.player.stake -= 10
+        return Bet(10, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
         """
@@ -55,7 +56,7 @@ class Player1326NoWins(Player1326State):
         Returns:
             Player1326State: _description_
         """
-        return Player1362OneWin()
+        return Player1362OneWin(self.player)
     
 class Player1362OneWin(Player1326State):
     """
@@ -66,12 +67,12 @@ class Player1362OneWin(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
     
-    def currenBet(self, amount: int, oc: Outcome) -> Bet:
+    def currenBet(self) -> Bet:
         self.player.stake -= 10 * 3
-        return Bet(amount, self.player.outcome)
+        return Bet(10 * 3, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
-        return Player1362TwoWin()
+        return Player1362TwoWin(self.player)
 
 class Player1362TwoWin(Player1326State):
     """
@@ -82,11 +83,12 @@ class Player1362TwoWin(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
     
-    def currenBet(self, amount: int, oc: Outcome) -> Bet:
-        return Bet(amount * 2, oc)
+    def currenBet(self) -> Bet:
+        self.player.stake -= 10 * 2
+        return Bet(10 * 2, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
-        return Player1362ThreeWin()
+        return Player1362ThreeWin(self.player)
 
 class Player1362ThreeWin(Player1326State):
     """
@@ -97,11 +99,12 @@ class Player1362ThreeWin(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
     
-    def currenBet(self, amount: int, oc: Outcome) -> Bet:
-        return Bet(amount * 6, oc)
+    def currenBet(self) -> Bet:
+        self.player.stake -= 10 * 6
+        return Bet(10 * 6, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
-        return Player1326NoWins()
+        return Player1326NoWins(self.player)
 
 class Player1326(Player):
     """
