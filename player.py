@@ -26,7 +26,6 @@ class Player:
     def win(self, bet: Bet):
         self.__stake += bet.winAmount()
         self.stat[0] += 1
-        return
     
     def lose(self, bet: Bet):
         if isinstance(bet, PrisonOutcome):

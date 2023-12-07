@@ -51,7 +51,7 @@ class Martingale(Player):
 
         Args:
             set (Outcome)): _description_
-        # """
+        """
         pass
         # if Outcome("RED", 1) in outcomes:
         #     self.redCounts -= 1
