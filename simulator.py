@@ -39,7 +39,7 @@ class Simulator:
         duration = 0
         stakes = [player.stake]
         while player.playing():
-            bet = self.game.cycle(player)
+            self.game.cycle(player)
             stakes.append(player.stake)
             duration += 1
         self.durations.append(duration)

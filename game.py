@@ -33,7 +33,6 @@ class Game:
                 player.lose(bet)
         if player.__class__ == (SevenReds | Martingale):
             player.winners(set(win_bin))
-        return player.bet
 
 
 # if __name__ == "__main__":
