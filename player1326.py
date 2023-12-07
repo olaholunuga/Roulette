@@ -35,7 +35,7 @@ class Player1326State(metaclass=ABCMeta):
         Returns:
             Player1326State:
         """
-        return Player1326NoWins()
+        return Player1326NoWins(self.player)
 
 class Player1326NoWins(Player1326State):
     """
@@ -43,8 +43,8 @@ class Player1326NoWins(Player1326State):
     Args:
         Player1326State (Player1326State):
     """
-    def __init__(self) -> None:
-        pass
+    def __init__(self, player: Player) -> None:
+        super().__init__(player)
     
     def currenBet(self, amount: int, oc: Outcome) -> Bet:
         return Bet(amount, oc)
@@ -63,11 +63,12 @@ class Player1362OneWin(Player1326State):
     Args:
         Player1326State (Player1362State):
     """
-    def __init__(self) -> None:
-        pass
+    def __init__(self, player: Player) -> None:
+        super().__init__(player)
     
     def currenBet(self, amount: int, oc: Outcome) -> Bet:
-        return Bet(amount * 3, oc)
+        self.player.stake -= 10 * 3
+        return Bet(amount, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
         return Player1362TwoWin()
@@ -78,8 +79,8 @@ class Player1362TwoWin(Player1326State):
     Args:
         Player1326State (Player1362State):
     """
-    def __init__(self) -> None:
-        pass
+    def __init__(self, player: Player) -> None:
+        super().__init__(player)
     
     def currenBet(self, amount: int, oc: Outcome) -> Bet:
         return Bet(amount * 2, oc)
@@ -93,8 +94,8 @@ class Player1362ThreeWin(Player1326State):
     Args:
         Player1326State (Player1362State):
     """
-    def __init__(self) -> None:
-        pass
+    def __init__(self, player: Player) -> None:
+        super().__init__(player)
     
     def currenBet(self, amount: int, oc: Outcome) -> Bet:
         return Bet(amount * 6, oc)
