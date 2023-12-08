@@ -21,7 +21,7 @@ class Player:
         
     
     def placeBet(self):
-        pass
+        raise NotImplementedError
     
     def win(self, bet: Bet):
         self.__stake += bet.winAmount()

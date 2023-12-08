@@ -7,6 +7,7 @@ from passenger57 import Passenger57
 from bin_builder import BinBuilder
 from martingale import Martingale
 from sevenreds import SevenReds
+from player1326 import Player1326
 
 @dataclass
 class Game:
@@ -15,7 +16,7 @@ class Game:
     wheel: Wheel
     table: Table
         
-    def cycle(self, player: ( SevenReds | Martingale | Passenger57 )):
+    def cycle(self, player: ( SevenReds | Martingale | Passenger57 | Player1326 )):
         """
 
         Args:

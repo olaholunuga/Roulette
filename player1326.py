@@ -48,12 +48,12 @@ class Player1326NoWins(Player1326State):
     
     def currenBet(self) -> Bet:
         amount = 10
-        if amount > self.stake:
-            amount = self.stake
-        if amount > self.table.limit:
-            amount = self.table.limit
+        if amount > self.player.stake:
+            amount = self.player.stake
+        if amount > self.player.table.limit:
+            amount = self.player.table.limit
         self.player.stake -= amount
-        return Bet(10, self.player.outcome)
+        return Bet(amount, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
         """
@@ -74,12 +74,12 @@ class Player1362OneWin(Player1326State):
     
     def currenBet(self) -> Bet:
         amount = 10 * 3
-        if amount > self.stake:
-            amount = self.stake
-        if amount > self.table.limit:
-            amount = self.table.limit
+        if amount > self.player.stake:
+            amount = self.player.stake
+        if amount > self.player.table.limit:
+            amount = self.player.table.limit
         self.player.stake -= amount
-        return Bet(10 * 3, self.player.outcome)
+        return Bet(amount, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
         return Player1362TwoWin(self.player)
@@ -95,12 +95,12 @@ class Player1362TwoWin(Player1326State):
     
     def currenBet(self) -> Bet:
         amount = 10 * 2
-        if amount > self.stake:
-            amount = self.stake
-        if amount > self.table.limit:
-            amount = self.table.limit
+        if amount > self.player.stake:
+            amount = self.player.stake
+        if amount > self.player.table.limit:
+            amount = self.player.table.limit
         self.player.stake -= amount
-        return Bet(10 * 2, self.player.outcome)
+        return Bet(amount, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
         return Player1362ThreeWin(self.player)
@@ -116,12 +116,12 @@ class Player1362ThreeWin(Player1326State):
     
     def currenBet(self) -> Bet:
         amount = 10 * 6
-        if amount > self.stake:
-            amount = self.stake
-        if amount > self.table.limit:
-            amount = self.table.limit
+        if amount > self.player.stake:
+            amount = self.player.stake
+        if amount > self.player.table.limit:
+            amount = self.player.table.limit
         self.player.stake -= amount
-        return Bet(10 * 6, self.player.outcome)
+        return Bet(amount, self.player.outcome)
     
     def nextWon(self) -> Player1326State:
         return Player1326NoWins(self.player)
@@ -143,7 +143,6 @@ class Player1326(Player):
     
     def placeBet(self) -> Bet:
         bet = self.state.currenBet()
-        self.stake -= bet.amountBet
         try:
             self.table.placeBet(bet)
         except InvalidBet:
