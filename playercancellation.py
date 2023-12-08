@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from Roulette.table import Table, InvalidBet
+from table import Table, InvalidBet
 from player import Player
 from bet import Bet
 
