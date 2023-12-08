@@ -19,7 +19,7 @@ class Simulator:
             game (Game): _description_
         """
         self.initDurations = 250
-        self.initStake = 10
+        self.initStake = 100
         self.samples = 50
         self.durations = []
         self.maxima = []
