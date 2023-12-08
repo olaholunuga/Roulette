@@ -35,7 +35,7 @@ class Player1326State(metaclass=ABCMeta):
         Returns:
             Player1326State:
         """
-        return self.nextStateWin(self.player)
+        return self.player.states.get(self.nextStateWin) # self.nextStateWin(self.player)
     
     def nextLost(self) -> "Player1326State":
         """
@@ -43,7 +43,7 @@ class Player1326State(metaclass=ABCMeta):
         Returns:
             Player1326State:
         """
-        return Player1326NoWins(self.player)
+        return self.player.states.get("noWin") # Player1326NoWins(self.player)
 
 class Player1326NoWins(Player1326State):
     """
@@ -54,7 +54,7 @@ class Player1326NoWins(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
         self.betAmount = 1
-        self.nextStateWin = Player1362OneWin
+        self.nextStateWin = "oneWin"
     
 class Player1362OneWin(Player1326State):
     """
@@ -65,7 +65,7 @@ class Player1362OneWin(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
         self.betAmount = 3
-        self.nextStateWin = Player1362TwoWin
+        self.nextStateWin = "twoWin"
 
 class Player1362TwoWin(Player1326State):
     """
@@ -76,7 +76,7 @@ class Player1362TwoWin(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
         self.betAmount = 2
-        self.nextStateWin = Player1362ThreeWin
+        self.nextStateWin = "threeWin"
 
 class Player1362ThreeWin(Player1326State):
     """
@@ -87,9 +87,26 @@ class Player1362ThreeWin(Player1326State):
     def __init__(self, player: Player) -> None:
         super().__init__(player)
         self.betAmount = 6
-        self.nextStateWin = Player1326NoWins
+        self.nextStateWin = "noWin"
 
+class Player1326StateFactory:
+    
+    def __init__(self, player: Player) -> None:
+        self.values = {
+            "noWin": Player1326NoWins(player),
+            "oneWin": Player1362OneWin(player),
+            "twoWin": Player1362TwoWin(player),
+            "threeWin": Player1362ThreeWin(player)
+        }
+    def get(self, name: str) -> Player1326State:
+        """
+        Args:
+            name (str): _description_
 
+        Returns:
+            Player1326State: _description_
+        """
+        return self.values[name]
 
 class Player1326(Player):
     """
@@ -101,10 +118,11 @@ class Player1326(Player):
     def __init__(self, table: Table) -> None:
         super().__init__(table)
         self.outcome = self.table.wheel.getOutcome("BLACK")
+        self.states = Player1326StateFactory(self)
         self.state: (Player1326NoWins |
                      Player1362OneWin |
                      Player1362TwoWin |
-                     Player1362ThreeWin) = Player1326NoWins(self)
+                     Player1362ThreeWin) = self.states.get("noWin")
     
     def placeBet(self) -> Bet:
         bet = self.state.currenBet()
