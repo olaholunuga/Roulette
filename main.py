@@ -15,7 +15,7 @@ if __name__ == "__main__":
     table = Table(wheel, 1000, 1)
     bb = BinBuilder()
     bb.buildBins(wheel)
-    player = PlayerFactory("player1326", table)
+    player = PlayerFactory("playercancel", table)
     game = Game(wheel, table)
     sim = Simulator(player, game)
     sim.gather()

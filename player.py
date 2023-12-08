@@ -17,7 +17,7 @@ class Player:
             return False
         if self.__roundsToGo > 0 or self.stake > 0:
             return True
-        False
+        return False
         
     
     def placeBet(self):
