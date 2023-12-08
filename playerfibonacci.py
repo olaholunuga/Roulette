@@ -4,7 +4,7 @@ from player import Player
 from bet import Bet
 from table import Table, InvalidBet
 
-class PlayerFibinacci(Player):
+class PlayerFibonacci(Player):
     
     def __init__(self, table: Table) -> None:
         super().__init__(table)

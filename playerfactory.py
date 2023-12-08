@@ -7,6 +7,7 @@ from table import Table
 from playerrandom import PlayerRandom
 from player1326 import Player1326
 from playercancellation import PlayerCancellation
+from playerfibonacci import PlayerFibonacci
 
 class PlayerFactory:
     """A Player initializer for the User of the Subclasses of Player to choose any player of their choice
@@ -30,5 +31,7 @@ class PlayerFactory:
             return Player1326(self.table)
         elif self.name.lower() == "playercancel":
             return PlayerCancellation(self.table)
+        elif self.name.lower() == "playerfibo":
+            return PlayerFibonacci(self.table)
         else:
             raise ValueError
