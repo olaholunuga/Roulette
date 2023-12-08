@@ -31,7 +31,6 @@ class Player:
         if isinstance(bet, PrisonOutcome):
             self.stake += bet.amountBet * 0.5
         self.stat[1] += 1
-        return
     
     @property
     def stake(self):

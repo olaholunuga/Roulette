@@ -12,7 +12,7 @@ class PlayerCancellation(Player):
         self.resetSequence()
     
     def resetSequence(self) -> None:
-        self.sequence = [1, 2, 3, 4, 5, 6]
+        self.sequence = [1, 1, 1, 1, 1, 1]
     
     def placeBet(self):
         amount = self.sequence[0] + self.sequence[-1]
@@ -26,3 +26,13 @@ class PlayerCancellation(Player):
             self.table.placeBet(bet)
         except InvalidBet:
             pass
+    
+    def win(self, bet: Bet):
+        super().win(bet)
+        del self.sequence[-1]
+        del self.sequence[0]
+    
+    def lose(self, bet: Bet):
+        super().lose(bet)
+        f_l_sum = self.sequence[0] + self.sequence[-1]
+        self.sequence.append(f_l_sum)
