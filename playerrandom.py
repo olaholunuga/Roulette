@@ -29,4 +29,4 @@ class PlayerRandom(Player):
         try:
             self.table.placeBet(self.bet)
         except InvalidBet:
-            pass
+            print("Invalid bet Error")

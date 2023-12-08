@@ -129,7 +129,7 @@ class Player1326(Player):
         try:
             self.table.placeBet(bet)
         except InvalidBet:
-            pass
+            print("Invalid bet Error")
     
     def win(self, bet: Bet) -> None:
         self.state = self.state.nextWon()

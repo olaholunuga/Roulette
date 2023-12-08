@@ -34,7 +34,7 @@ class PlayerCancellation(Player):
         try:
             self.table.placeBet(bet)
         except InvalidBet:
-            pass
+            print("Invalid bet Error")
     
     def win(self, bet: Bet):
         super().win(bet)

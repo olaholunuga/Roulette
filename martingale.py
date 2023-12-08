@@ -24,7 +24,7 @@ class Martingale(Player):
         try:
             self.table.placeBet(self.bet)
         except InvalidBet:
-            pass
+            print("Invalid bet Error")
     
     def win(self, bet):
         """
