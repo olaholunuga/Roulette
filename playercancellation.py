@@ -17,9 +17,9 @@ class PlayerCancellation(Player):
     def playing(self):
         if len(self.sequence) == 0:
             return False
-        if self.__roundsToGo <= 0 or self.stake <= 0:
+        if self.rounds <= 0 or self.stake <= 0:
             return False
-        if self.__roundsToGo > 0 or self.stake > 0:
+        if self.rounds > 0 or self.stake > 0:
             return True
         return False
     
@@ -40,7 +40,7 @@ class PlayerCancellation(Player):
         super().win(bet)
         del self.sequence[-1]
         del self.sequence[0]
-        if len(self.sequence) < 2:
+        if len(self.sequence) == 1:
             self.resetSequence()
     
     def lose(self, bet: Bet):
